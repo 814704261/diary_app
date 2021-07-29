@@ -183,6 +183,7 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            crunchPngs false
         }
     }
 
@@ -214,7 +215,6 @@ dependencies {
     implementation project(':react-native-fs')
 
     implementation project(':react-native-image-picker')
-
 
     // 如果你需要支持GIF动图
     implementation 'com.facebook.fresco:animated-gif:2.0.0'

@@ -35,8 +35,7 @@ export default StyleSheet.create({
         color: 'black',
     },
     scrollView: {
-        flex: 1,
-        height: '100%',
+        // flex: 1,
         backgroundColor: 'white'
     },
     listItem:{
@@ -63,10 +62,17 @@ export default StyleSheet.create({
         color: 'black',
     },
     rich: {
-        height: 450,
+        // minHeight: 450,
         flex: 1,
         // borderBottomWidth: StyleSheet.hairlineWidth,
         // borderColor: '#e3e3e3',
+    },
+    textInput: {
+        textAlign: 'center',
+        fontSize: 22,
+        fontWeight: '600',
+        fontFamily: 'Cold_stone',
+        height: '100%'
     },
     staticalWord: {
         position: 'absolute',
@@ -83,5 +89,27 @@ export default StyleSheet.create({
         backgroundColor: 'blue',
         borderRadius: 10,
         marginRight: 5,
+    },
+    modal: {
+        backgroundColor: 'pink',
+        width: '100%',
+        height: 200,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+    },
+    modal_takePhoto:{
+        height: 100,
+        width: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white'
+    },
+    modal_photos: {
+        height: 100,
+        width: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white'
     }
 })

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SplashScreen from 'react-native-splash-screen'
+import checkUpdate from './src/utils/checkUpdate'
 
 // 路由
 import { NavigationContainer } from '@react-navigation/native';
@@ -21,7 +22,8 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 export default class App extends Component{
 
   componentDidMount(){
-    SplashScreen.hide()
+    SplashScreen.hide() //关闭启动屏幕
+    checkUpdate()       //检查更新
   }
 
   render() {

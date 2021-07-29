@@ -19,6 +19,8 @@ target 'diaryApp' do
 
   pod 'RNFS', :path => '../node_modules/react-native-fs'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'diaryAppTests' do
     inherit! :complete
     # Pods for testing
