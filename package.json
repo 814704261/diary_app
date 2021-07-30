@@ -17,11 +17,11 @@
     "@react-navigation/stack": "^5.14.5",
     "react": "17.0.1",
     "react-native": "0.64.2",
-    "react-native-elements": "^3.4.2",
     "react-native-fs": "^2.18.0",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-image-picker": "^4.0.6",
     "react-native-modal": "^12.0.3",
+    "react-native-modalbox": "^2.0.2",
     "react-native-paper": "^4.9.2",
     "react-native-pell-rich-editor": "^1.8.5",
     "react-native-picker": "^4.3.7",
@@ -30,11 +30,13 @@
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.4.0",
     "react-native-snap-carousel": "^3.9.1",
+    "react-native-spinkit": "^1.5.1",
     "react-native-splash-screen": "^3.2.0",
     "react-native-storage": "^1.0.1",
     "react-native-update": "^6.1.0",
     "react-native-vector-icons": "^8.1.0",
-    "react-native-webview": "^11.6.5"
+    "react-native-webview": "^11.6.5",
+    "react-native-zip-archive": "^6.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
