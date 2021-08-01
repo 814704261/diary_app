@@ -14,36 +14,45 @@ import HomeScreen from './src/pages/home';
 import StatisticalScreen from './src/pages/statistical';
 import ProfileScreen from './src/pages/profile';
 import EditScreen from "./src/pages/edit";
+import DiaryDetailScreen from "./src/pages/diaryDetail";
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import { RootSiblingParent } from 'react-native-root-siblings';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default class App extends Component{
 
   componentDidMount(){
     SplashScreen.hide() //关闭启动屏幕
-    checkUpdate()       //检查更新
+    // checkUpdate()       //检查更新
   }
 
   render() {
     return (
-        <SafeAreaProvider>
-            <NavigationContainer>
-                <Stack.Navigator>
-                    <Stack.Screen
-                        name="Tabs"
-                        component={MyTabs}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="Edit"
-                        component={EditScreen}
-                        options={{headerShown: false}}
-                    />
-                </Stack.Navigator>
-            </NavigationContainer>
-        </SafeAreaProvider>
+        <RootSiblingParent>
+            <SafeAreaProvider>
+                <NavigationContainer>
+                    <Stack.Navigator>
+                        <Stack.Screen
+                            name="Tabs"
+                            component={MyTabs}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="Edit"
+                            component={EditScreen}
+                            options={{headerShown: false}}
+                        />
+                        <Stack.Screen
+                            name="DiaryDetail"
+                            component={DiaryDetailScreen}
+                            options={{headerShown: false}}
+                        />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </SafeAreaProvider>
+        </RootSiblingParent>
     )
   }
 }

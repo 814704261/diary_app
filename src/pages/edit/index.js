@@ -36,8 +36,9 @@ import styles from './styles'
 const moodData = ['愉快','开心','高兴','甜蜜','犹豫','兴奋','失落','难过','失恋','苦闷','烦躁','生气','慨愤','无所谓','不知道',]
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight =Dimensions.get('window').height;
-
-
+// const regExp = /<img.*?src=["|']?(.*?)["|']?\s.*?>/ig;       //匹配img标签
+const regExp2 = /\bsrc\b\s*=\s*['"]?([^'"]*)['"]?/i;      //匹配src属性
+const regExp = /<img.*?src=["|']?(.*?)["|']?>/ig;
 
 export default class Edit extends PureComponent{
 
@@ -186,16 +187,25 @@ export default class Edit extends PureComponent{
 
     //保存日记
     onSaveDiary = (key) => {
-        let {diaryTitle, diaryContent, diaryWords, mood, time} = this.state
+        let {diaryTitle, diaryContent, diaryWords, mood, time, images} = this.state
+
         if (diaryContent.length === 0){return Toast('你好像还没编辑日记')}
+
+        let imgs = diaryContent.match(regExp)
+        imgs?.forEach(img => {
+            images.push(img.match(regExp2)[1])
+        })
+
         Store.findAllDataByKey(key)
             .then(res =>{
+                console.log(res)
                 return Store.save(key, {
                     diaryTitle,
                     diaryContent,
                     diaryWords,
                     mood,
                     time,
+                    images,
                     createTime: Date.now()
                 }, res.length)
             })

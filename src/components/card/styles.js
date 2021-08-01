@@ -33,9 +33,12 @@ export default StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    touch: {
+        flex: 1,
+        justifyContent: 'space-between'
+    },
     body: {
         flex: 1,
-        backgroundColor: 'blue',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
     },

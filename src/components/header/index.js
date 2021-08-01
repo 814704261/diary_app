@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import {
     View,
-    Text,
     StyleSheet,
     TouchableOpacity,
     ToastAndroid,
 } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Text from '../text'
 
 const styles = StyleSheet.create({
     header: {

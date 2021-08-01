@@ -13,29 +13,27 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     modal: {
-        justifyContent: 'center',
         alignItems: 'center',
         height: 230,
-        backgroundColor: "#3B5998"
     },
-    btn: {
-        margin: 10,
-        backgroundColor: "#3B5998",
-        color: "white",
-        padding: 10
+    scrollWrap: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flex: 1,
     },
-
-    btnModal: {
-        position: "absolute",
-        top: 0,
-        right: 0,
-        width: 50,
-        height: 50,
-        backgroundColor: "transparent"
+    scrollItem: {
+        height: '80%',
+        width: 150,
+        marginRight: 10,
+        marginLeft: 10,
+        backgroundColor: 'white',
+        borderWidth: 2,
+        borderStyle: 'solid',
+        borderColor: 'red',
     },
-
-    text: {
-        color: "black",
-        fontSize: 22
-    }
+    scrollItemImg: {
+        width: '100%',
+        height: '100%',
+    },
 })

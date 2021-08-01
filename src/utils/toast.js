@@ -1,7 +1,7 @@
 import Toast from 'react-native-root-toast';
 
 
-function toast (message, time=Toast.durations.LONG, position= Toast.positions.CENTER){
+export default function toast (message, time=Toast.durations.LONG, position= Toast.positions.CENTER){
     return Toast.show(message, {
         duration: time,
         position,
@@ -24,6 +24,3 @@ function toast (message, time=Toast.durations.LONG, position= Toast.positions.CE
         }
     });
 }
-
-
-export default toast
