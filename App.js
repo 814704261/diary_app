@@ -75,7 +75,7 @@ function MyTabs() {
                   tabBarIcon:({focused, color})=>{
                       return <MaterialCommunityIcons name="home" color={color} size={26} />
                   },
-                  tabBarColor:"pink"
+                  tabBarColor:"#03A9F4"
               }}
           />
           <Tab.Screen
@@ -86,7 +86,7 @@ function MyTabs() {
                   tabBarIcon:({focused, color})=>{
                       return <MaterialCommunityIcons name="chart-line" color={color} size={26} />
                   },
-                  tabBarColor:"red"
+                  tabBarColor:"#E91E63"
               }}
           />
           <Tab.Screen
@@ -97,7 +97,7 @@ function MyTabs() {
                   tabBarIcon:({focused, color})=>{
                       return <MaterialCommunityIcons name="account-circle-outline" color={color} size={26} />
                   },
-                  tabBarColor:"blue"
+                  tabBarColor:"#7C4DFF"
               }}
           />
       </Tab.Navigator>

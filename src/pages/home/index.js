@@ -25,12 +25,14 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import {getHeight, getWidth} from "../../utils/fitSize";
 
+const coverImage = require('../../static/images/cover.jpg');
+
 import styles from './styles'
 
 export default class Home extends PureComponent{
 
     state = {
-        diaryData: [1,2,3,4],  //用户日记列表
+        diaryData: [],  //用户日记列表
         activeIndex: 0,
         isOpen: false,
         isDisabled: false,
@@ -44,14 +46,15 @@ export default class Home extends PureComponent{
     }
 
     componentDidMount() {
+        this.initData()
         let {navigation} = this.props
-        // navigation.addListener('focus', ()=>{
-        //     console.warn('home focus')
-        // })
-        // navigation.addListener('blur', ()=>{
-        //     console.warn('home blur')
-        // })
-        // this.initData()
+
+        navigation.addListener('focus', ()=>{
+            this.initData()
+        })
+        navigation.addListener('blur', ()=>{
+            console.warn('home blur')
+        })
     }
 
     //初始化数据，读取日记列表
@@ -77,7 +80,7 @@ export default class Home extends PureComponent{
         }
 
         return (
-            <CardOne navigation={this.props.navigation} changeCover={changeCover} />
+            <CardOne data={item} index={index} navigation={this.props.navigation} changeCover={changeCover} />
         );
     }
 
@@ -93,7 +96,7 @@ export default class Home extends PureComponent{
     render() {
         let {diaryData} = this.state
         return (
-            <SafeAreaView style={{flex: 1, backgroundColor: 'pink',}}>
+            <SafeAreaView style={{flex: 1, backgroundColor: '#00BCD4',}}>
                 <Header
                     title="首页"
                     right={
@@ -126,32 +129,7 @@ export default class Home extends PureComponent{
                         <View style={styles.scrollWrap}>
                             <TouchableOpacity onPress={this.clickCover}>
                                 <View style={styles.scrollItem}>
-                                    <Image source={require('../../static/images/cover.jpg')} style={styles.scrollItemImg} />
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={this.clickCover}>
-                                <View style={styles.scrollItem}>
-                                    <Image source={require('../../static/images/cover.jpg')} style={styles.scrollItemImg} />
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={this.clickCover}>
-                                <View style={styles.scrollItem}>
-                                    <Image source={require('../../static/images/cover.jpg')} style={styles.scrollItemImg} />
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={this.clickCover}>
-                                <View style={styles.scrollItem}>
-                                    <Image source={require('../../static/images/cover.jpg')} style={styles.scrollItemImg} />
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={this.clickCover}>
-                                <View style={styles.scrollItem}>
-                                    <Image source={require('../../static/images/cover.jpg')} style={styles.scrollItemImg} />
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={this.clickCover}>
-                                <View style={styles.scrollItem}>
-                                    <Image source={require('../../static/images/cover.jpg')} style={styles.scrollItemImg} />
+                                    <Image source={coverImage} style={styles.scrollItemImg} />
                                 </View>
                             </TouchableOpacity>
                         </View>

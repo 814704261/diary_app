@@ -12,40 +12,48 @@ const coverImage = require('../../static/images/cover.jpg')
 
 export default class MyCard extends Component{
 
+
+    state = {
+
+    }
+
+
     //更换封面
-    changeCover = () => {
-        this.props.changeCover()
+    changeCover = (index) => {
+        this.props.changeCover(index)
     }
 
     //跳转详情页
-    goToDetail = () => {
-        this.props.navigation.navigate('DiaryDetail', {data: 123})
+    goToDetail = (index) => {
+        this.props.navigation.navigate('DiaryDetail', {index})
     }
 
     render() {
+        let {data, index} = this.props
+        let cover = data.coverImage? {uri: data.coverImage} : coverImage
         return (
             <View style={styles.card}>
                 <View style={styles.title}>
-                    <TouchableOpacity onPress={this.changeCover}>
+                    <TouchableOpacity onPress={() => this.changeCover(index)}>
                         <View style={styles.title_icon}>
                             <Icon name='ellipsis-h' size={25} color='white' />
                         </View>
                     </TouchableOpacity>
                 </View>
-                <TouchableWithoutFeedback style={{flex:1}} onPress={this.goToDetail}>
+                <TouchableWithoutFeedback style={{flex:1}} onPress={() => this.goToDetail(index)}>
                     <View style={styles.touch}>
                         <View style={styles.body}>
-                            <Image style={styles.body_image} source={coverImage}/>
+                            <Image style={styles.body_image} source={cover}/>
                         </View>
                         <View style={styles.bottom}>
                             <View style={styles.bottom_title}>
-                                <Text style={styles.bottom_title_text} ellipsizeMode='tail' numberOfLines={1}>啊哈哈这是标题</Text>
+                                <Text style={styles.bottom_title_text} ellipsizeMode='tail' numberOfLines={1}>{data.diaryTitle}</Text>
                             </View>
                             <View style={styles.bottom_line}>
                                 <Text style={styles.bottom_line_text}>---</Text>
                             </View>
                             <View style={styles.bottom_time}>
-                                <Text style={styles.bottom_time_text}>2021-09-01</Text>
+                                <Text style={styles.bottom_time_text}>{data.time}</Text>
                             </View>
                         </View>
                     </View>

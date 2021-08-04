@@ -1,4 +1,4 @@
-import React, {PureComponent, createRef} from 'react';
+import React, {PureComponent, createRef, Component} from 'react';
 import {
     ScrollView,
     StatusBar,
@@ -17,10 +17,9 @@ import Modal from 'react-native-modal';
 import Header from "../../components/header";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {RichEditor, RichToolbar, actions} from 'react-native-pell-rich-editor'
-import { Input } from 'react-native-elements'
 import Text from '../../components/text'
 import Picker, {showDatePicker} from '../../utils/picker'
-
+const Spinner = require('react-native-spinkit');
 
 //工具类
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
@@ -56,6 +55,7 @@ export default class Edit extends PureComponent{
         diaryWords: 0,      //用户编写日记内容的字数
         images: [],         //用户选择的图片
         isVisibleModal: false, //模态框是否展示（选择拍照或者图库）
+        showSpinner: false,    //加载弹框
     }
 
 
@@ -191,14 +191,22 @@ export default class Edit extends PureComponent{
 
         if (diaryContent.length === 0){return Toast('你好像还没编辑日记')}
 
+        this.setState({
+          showSpinner: true
+        })
+
+        // 获取日记中的图片
         let imgs = diaryContent.match(regExp)
         imgs?.forEach(img => {
             images.push(img.match(regExp2)[1])
         })
 
+        //获取日记记录时间的时间戳
+        let timestamp = new Date(time)
+
         Store.findAllDataByKey(key)
             .then(res =>{
-                console.log(res)
+              console.log('res',res)
                 return Store.save(key, {
                     diaryTitle,
                     diaryContent,
@@ -206,20 +214,33 @@ export default class Edit extends PureComponent{
                     mood,
                     time,
                     images,
+                    coverImage: images[0]? images[0] : '',
+                    timestamp: timestamp.getTime(),
                     createTime: Date.now()
                 }, res.length)
             })
             .then(() => {
+              this.setState({
+                showSpinner: false
+              },()=>{
+                setTimeout(()=>{
+                  this.props.navigation.replace('Tabs',{ screen: 'Home' })
+                },300)
+              })
 
             })
             .catch(err => {
-
+              console.log(err)
+              this.setState({
+                showSpinner: false
+              })
+              alert('保存日记失败了')
             })
     }
 
 
     render() {
-        let {mood, time, initHTML, diaryWords, isVisibleModal} = this.state
+        let {mood, time, initHTML, diaryWords, isVisibleModal,showSpinner} = this.state
         return (
             <SafeAreaView style={{flex:1}}>
                 <Header
@@ -370,6 +391,12 @@ export default class Edit extends PureComponent{
                         </TouchableOpacity>
                     </View>
                 </Modal>
+
+
+              {showSpinner && (<View style={styles.spinner}>
+                <Spinner isVisible={showSpinner} size={100} type='Circle' color='pink'/>
+              </View>)
+              }
 
             </SafeAreaView>
         )

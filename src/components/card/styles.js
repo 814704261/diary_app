@@ -12,7 +12,6 @@ export default StyleSheet.create({
         height: '100%',
         position: 'relative',
         justifyContent: 'space-between',
-        // boxShadow: {color: '#ccc', x: 0, y: -2,}
     },
     title: {
         width: '100%',
@@ -43,8 +42,8 @@ export default StyleSheet.create({
         borderTopRightRadius: 20,
     },
     body_image: {
-      height: '100%',
-      width: '100%',
+        height: '100%',
+        width: '100%',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
     },
