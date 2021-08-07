@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import SplashScreen from 'react-native-splash-screen'
 import checkUpdate from './src/utils/checkUpdate'
 
 // 路由
@@ -15,6 +14,7 @@ import StatisticalScreen from './src/pages/statistical';
 import ProfileScreen from './src/pages/profile';
 import EditScreen from "./src/pages/edit";
 import DiaryDetailScreen from "./src/pages/diaryDetail";
+import PreviewPdfScreen from "./src/pages/preview_pdf";
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -24,7 +24,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 export default class App extends Component{
 
   componentDidMount(){
-    SplashScreen.hide() //关闭启动屏幕
+
     // checkUpdate()       //检查更新
   }
 
@@ -49,6 +49,14 @@ export default class App extends Component{
                             component={DiaryDetailScreen}
                             options={{headerShown: false}}
                         />
+                        <Stack.Screen
+                          name='PreviewPdf'
+                          component={PreviewPdfScreen}
+                          options={
+                            {
+                              title: '读书'
+                            }
+                          }/>
                     </Stack.Navigator>
                 </NavigationContainer>
             </SafeAreaProvider>

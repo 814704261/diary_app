@@ -16,7 +16,7 @@ export default class Statistical extends PureComponent{
 
         <PieChart />
 
-        <View>
+        <View style={styles.container}>
 
         </View>
       </SafeAreaView>

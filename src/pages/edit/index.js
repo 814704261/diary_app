@@ -85,18 +85,17 @@ export default class Edit extends PureComponent{
             if(mood.length == 0) {
                return this.setState({
                     mood: [...mood, data[0]]
-                })
+               })
             }
 
-            mood.forEach(value => {
-                if(value == data[0]){
-                    return Toast('请不要重复选择')
-                }else{
-                    this.setState({
-                        mood: [...mood, data[0]]
-                    })
-                }
-            })
+            for(let i = 0; i < mood.length;i++){
+              if(mood[i] == data[0]){
+                return Toast('请不要重复选择')
+              }
+              this.setState({
+                mood: [...mood, data[0]]
+              })
+            }
         }).toggle()
     }
 
@@ -208,15 +207,15 @@ export default class Edit extends PureComponent{
             .then(res =>{
               console.log('res',res)
                 return Store.save(key, {
-                    diaryTitle,
-                    diaryContent,
-                    diaryWords,
-                    mood,
-                    time,
-                    images,
-                    coverImage: images[0]? images[0] : '',
-                    timestamp: timestamp.getTime(),
-                    createTime: Date.now()
+                    diaryTitle,     //日记的标题
+                    diaryContent,     //日记内容（html）
+                    diaryWords,       //日记的字数（不准确）
+                    mood,             //日记的心情（数组）
+                    time,         //日记记录的时间(字符串)
+                    images,       //日记内容包含的图片（base64）
+                    coverImage: images[0]? images[0] : '',      //日记的封面图片
+                    timestamp: timestamp.getTime(),     //日记记录的时间戳
+                    createTime: Date.now()      //日记创建的时间
                 }, res.length)
             })
             .then(() => {

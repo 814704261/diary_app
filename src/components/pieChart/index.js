@@ -33,20 +33,10 @@ class PieChartScreen extends React.Component {
               {value: 20, label: 'Soup'},
               {value: 20, label: 'Beverages'},
               {value: 20, label: 'Desserts'},
-              {value: 20, label: 'Sandwhes'},
-              {value: 20, label: 'Salads'},
-              {value: 20, label: 'Soup'},
-              {value: 20, label: 'Beverages'},
-              {value: 20, label: 'Desserts'}
           ],
-          // label: '心情统计扇图',
+          label: '心情统计扇图',
           config: {
             colors: [
-              processColor('#C0FF8C'),
-              processColor('#FFF78C'),
-              processColor('#FFD08C'),
-              processColor('#8CEAFF'),
-              processColor('#FF8C9D'),
               processColor('#C0FF8C'),
               processColor('#FFF78C'),
               processColor('#FFD08C'),
@@ -55,7 +45,7 @@ class PieChartScreen extends React.Component {
             ],
             valueTextSize: 20,
             valueTextColor: processColor('green'),
-            sliceSpace: 10,
+            sliceSpace: 5,
             selectionShift: 13,
             // xValuePosition: "OUTSIDE_SLICE",
             // yValuePosition: "OUTSIDE_SLICE",
@@ -65,7 +55,7 @@ class PieChartScreen extends React.Component {
           }
         }],
       },
-      // highlights: [{x:0}],
+      highlights: [{x:0}],
       description: {
         text: '你的心情是怎样的呢',
         textSize: 20,

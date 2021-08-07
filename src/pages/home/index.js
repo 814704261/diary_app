@@ -12,6 +12,7 @@ import {
     TouchableHighlight,
     TouchableOpacity,
 } from 'react-native';
+import SplashScreen from 'react-native-splash-screen'
 import * as Store from '../../store/sync'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Header from "../../components/header";
@@ -20,6 +21,7 @@ import Carousel from 'react-native-snap-carousel';
 import Modal from 'react-native-modalbox';
 
 import CardOne from '../../components/card'
+import CardTwo from '../../components/card_two'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -28,6 +30,7 @@ import {getHeight, getWidth} from "../../utils/fitSize";
 const coverImage = require('../../static/images/cover.jpg');
 
 import styles from './styles'
+import {dateToStr} from "../../utils/date";
 
 export default class Home extends PureComponent{
 
@@ -42,18 +45,17 @@ export default class Home extends PureComponent{
 
 
     componentWillUnmount() {
-        console.warn('home unmount')
+        // console.warn('home unmount')
+        this._unsubscribe()
     }
 
     componentDidMount() {
         this.initData()
-        let {navigation} = this.props
+        SplashScreen.hide() //关闭启动屏幕
 
-        navigation.addListener('focus', ()=>{
+        let {navigation} = this.props
+        this._unsubscribe = navigation.addListener('focus', ()=>{
             this.initData()
-        })
-        navigation.addListener('blur', ()=>{
-            console.warn('home blur')
         })
     }
 
@@ -88,9 +90,10 @@ export default class Home extends PureComponent{
 
     }
 
-    //跳转详情页
+    //跳转编辑页面
     gotoEdit = () => {
         this.props.navigation.navigate('Edit')
+        // this.props.navigation.navigate('PreviewPdf')
     }
 
     render() {
@@ -105,18 +108,25 @@ export default class Home extends PureComponent{
                         </TouchableOpacity>
                     }
                 />
-                <View style={styles.carousel}>
+
+                {diaryData.length > 0 && (<View style={styles.carousel}>
                     <Carousel
-                        layout={"default"}
-                        loop
-                        ref={ref => this.carousel = ref}
-                        data={diaryData}
-                        sliderWidth={windowWidth}
-                        itemWidth={getWidth(900)}
-                        renderItem={this._renderItem}
-                        onSnapToItem = { index => this.setState({activeIndex:index}) }
+                      layout={"default"}
+                      loop
+                      ref={ref => this.carousel = ref}
+                      data={diaryData}
+                      sliderWidth={windowWidth}
+                      itemWidth={getWidth(900)}
+                      renderItem={this._renderItem}
+                      onSnapToItem={index => this.setState({activeIndex: index})}
                     />
-                </View>
+                </View>)}
+
+                {/*如果没有日记就显示去写日记的卡片*/}
+                {diaryData.length === 0 && (<View style={styles.carousel}>
+                    <CardTwo navigation={this.props.navigation} />
+                </View>)}
+
 
                 <Modal
                     style={[styles.modal]}

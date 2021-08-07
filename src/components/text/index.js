@@ -3,11 +3,11 @@ import {Text} from "react-native";
 
 export default (props) => {
     return (
+      <Text {...props}>
         <Text style={{fontFamily:'Cold_stone'}}>
-            <Text {...props}>
-                {props.children}
-            </Text>
+          {props.children}
         </Text>
+      </Text>
     )
 }
 
