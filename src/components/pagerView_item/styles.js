@@ -4,7 +4,9 @@ import {StyleSheet} from "react-native";
 export default StyleSheet.create({
   container: {
     flex:1,
-    backgroundColor: 'pink'
+    width: '100%',
+    height: '100%',
+    backgroundColor:'yellow'
   },
   header: {
     width: '100%',

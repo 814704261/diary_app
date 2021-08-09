@@ -202,21 +202,21 @@ export default class Edit extends PureComponent{
 
         //获取日记记录时间的时间戳
         let timestamp = new Date(time)
-
+        let data = {
+          diaryTitle,     //日记的标题
+          diaryContent,     //日记内容（html）
+          diaryWords,       //日记的字数（不准确）
+          mood,             //日记的心情（数组）
+          time,         //日记记录的时间(字符串)
+          images,       //日记内容包含的图片（base64）
+          coverImage: images[0] ? images[0] : '',      //日记的封面图片
+          timestamp: timestamp.getTime(),     //日记记录的时间戳
+          createTime: Date.now()      //日记创建的时间
+        }
         Store.findAllDataByKey(key)
             .then(res =>{
-              console.log('res',res)
-                return Store.save(key, {
-                    diaryTitle,     //日记的标题
-                    diaryContent,     //日记内容（html）
-                    diaryWords,       //日记的字数（不准确）
-                    mood,             //日记的心情（数组）
-                    time,         //日记记录的时间(字符串)
-                    images,       //日记内容包含的图片（base64）
-                    coverImage: images[0]? images[0] : '',      //日记的封面图片
-                    timestamp: timestamp.getTime(),     //日记记录的时间戳
-                    createTime: Date.now()      //日记创建的时间
-                }, res.length)
+              // console.log('res',res)
+              return baocun(data, key, res.length)
             })
             .then(() => {
               this.setState({
@@ -230,6 +230,7 @@ export default class Edit extends PureComponent{
             })
             .catch(err => {
               console.log(err)
+
               this.setState({
                 showSpinner: false
               })
@@ -319,7 +320,8 @@ export default class Edit extends PureComponent{
                         editorStyle={{
                             backgroundColor: 'white',
                             caretColor: '#303F9F',
-                            contentCSSText: 'font-size: 16'
+                            contentCSSText: 'font-size: 20px;letter-spacing:1px;word-break: break-all;',
+                            cssText:'font-size: 20px;letter-spacing:1px;word-break: break-all'
                         }}
                         pasteAsPlainText={true}
                     />
@@ -424,4 +426,10 @@ function HeaderRight(props){
             </TouchableOpacity>
         </View>
     )
+}
+
+
+
+function baocun(data, key, length=0){
+  return Store.save(data, key, length)
 }

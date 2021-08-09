@@ -26,6 +26,7 @@ export default class DiaryDetail extends PureComponent{
     constructor(props) {
         super(props);
         this.PagerView = createRef()
+        this.webview = createRef()
     }
 
     state = {
@@ -62,23 +63,92 @@ export default class DiaryDetail extends PureComponent{
         let {initialPage, data} = this.state
         return (
             <SafeAreaView style={{flex:1}}>
-                <PagerView
-                    style={styles.pagerView}
-                    initialPage={initialPage}
-                    onPageScroll={this.onPageScrollHandle}
-                    transitionStyle='curl'
-                    orientation="horizontal"
-                    layoutDirection="ltr"
-                    ref={this.PagerView}
-                >
-                    {
-                        data.map((item, index) => {
-                            return <PagerViewItem key={item.createTime} item={item} index={index} />
-                        })
-                    }
-                </PagerView>
+                <View style={styles.header}>
+                    <TouchableOpacity>
+                        <View style={styles.header_left}>
+                            <Icon name='angle-left' size={30} color='black' />
+                        </View>
+                    </TouchableOpacity>
+                    <View>
+                        <Text style={{fontSize: 20, color: 'black'}}>这是日记的标题</Text>
+                    </View>
+                    <TouchableOpacity>
+                        <View style={styles.header_right}>
+                            <Icon name='ellipsis-h' size={30} color='black' />
+                        </View>
+                    </TouchableOpacity>
+                </View>
+
+                <View>
+                    <View style={styles.time}>
+                        <View style={styles.timeItem}>
+                            <Icon style={{marginRight: 10}} name='calendar-times-o' size={30} color='black' />
+                            <Text style={styles.timeTitle}>时间：</Text>
+                            <Text style={styles.timeText}>2020-01-09</Text>
+                        </View>
+                        <Icon name='angle-right' size={30} color='black' />
+                    </View>
+                    <View style={styles.mood}>
+                        <View style={styles.moodLeft}>
+                            <Icon style={{marginRight: 10}} name='pagelines' size={30} color='black' />
+                            <Text style={styles.timeTitle}>心情：</Text>
+                            {
+                                ['愉快', '开心'].map(value => {
+                                    return (
+                                      <View key={value} style={styles.moodItem}>
+                                          <Text style={styles.moodItemText}>{value}</Text>
+                                      </View>
+                                    )
+                                })
+                            }
+                        </View>
+                        <Icon name='angle-right' size={30} color='black' />
+                    </View>
+                </View>
+                <View style={{flex:1}}>
+                    <WebView
+                      ref={this.webview}
+                      originWhiteList={['*']}
+                      allowFileAccessFromFileURLs={true}
+                      allowUniversalAccessFromFileURLs={true}
+                      scrollEnabled={true}
+                      // containerStyle={{ marginTop: 20,fontSize:20,height:'100%',flex:0 }}
+                      // textZoom={100}
+                      scalesPageToFit={false}
+                      source={{ html: html }}
+                    />
+                </View>
+
             </SafeAreaView>
         )
     }
 }
 
+
+const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+ <style>
+  *{
+    box-sizing: border-box;
+  }
+  body{
+    font-size: 18px;
+    background-color: #00BCD4;
+  },
+  img: {
+    width: 100%;
+  }
+ </style>
+</head>
+<body>
+  <h1>这是标题</h1>
+  <h2>这是副标题</h2>
+</body>
+</html>
+
+`
